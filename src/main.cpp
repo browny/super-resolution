@@ -13,15 +13,15 @@ using namespace cimg_library;
 #include "2dmem_template_class.h"
 
 // Construct Weight Table
-int index;
 float WeightTable[256];
 
 void nlmZoom2(CImg<unsigned char>*, CImg<unsigned char>*);
 void zoom(CImg<unsigned char>*, CImg<unsigned char>*, int scale);
 
-int main(int argc, _TCHAR* argv[])
+int main(int argc, char* argv[])
 {
 
+	int index;
 	for (int i = 0; i < 256; i++) {
 		index = i;
 		WeightTable[i] = exp(-index * 0.2);
