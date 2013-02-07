@@ -20,7 +20,6 @@ void zoom(CImg<unsigned char>*, CImg<unsigned char>*, int scale);
 
 int main(int argc, char* argv[])
 {
-
 	int index;
 	for (int i = 0; i < 256; i++) {
 		index = i;
@@ -29,14 +28,19 @@ int main(int argc, char* argv[])
 
 	CImg<unsigned char> inImg;
 	CImg<unsigned char> outImg;
+	CImg<unsigned char> bicubicImg;
 
 	const char* src = "raw.bmp";
 	inImg.load(src);
+	bicubicImg.load(src);
 
-	zoom(&inImg, &outImg, 2); // if you want x4 => zoom(&inImg, &outImg, 4);
+	zoom(&inImg, &outImg, 4); // if you want x4 => zoom(&inImg, &outImg, 4);
 
 	const char* result = "out.bmp";
 	outImg.save(result);
+
+	bicubicImg.resize(bicubicImg.width*4, bicubicImg.height*4, 1, 3, 5, -1, false);
+	bicubicImg.save("bicubic.bmp");
 
 	return 0;
 }
